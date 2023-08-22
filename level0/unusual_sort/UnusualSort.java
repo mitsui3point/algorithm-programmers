@@ -1,6 +1,7 @@
 package level0.unusual_sort;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class UnusualSort {
     public static void main(String[] args) {
@@ -13,35 +14,18 @@ public class UnusualSort {
 
     public static int[] solution(int[] numlist, int n) {
         int[] answer = new int[numlist.length];
-        int[] buffers = new int[numlist.length];
-
-        int i = 0, prev = 0;
+        Integer[] buffers = new Integer[numlist.length];
+        int i = 0;
         for (int num : numlist) {
-            buffers[i] = num - n;
-            i++;
+            buffers[i++] = num - n;
         }
-        for (int outer = 0; outer < buffers.length; outer++) {
-            for (int inner = 0; inner < buffers.length; inner++) {
-                int temp = 0;
-                boolean biggerInner = Math.abs(buffers[inner]) > Math.abs(buffers[outer]);
-                boolean isAbsoluteEquals = Math.abs(buffers[inner]) == Math.abs(buffers[outer]);
-                boolean isNegativeInner = buffers[inner] < buffers[outer];
-                if (biggerInner || (isAbsoluteEquals && isNegativeInner)) {
-                    temp = buffers[inner];
-                    buffers[inner] = buffers[outer];
-                    buffers[outer] = temp;
-                }
-            }
-
-        }
+        Arrays.sort(buffers, (a, b) -> b - a);
+        Arrays.sort(buffers, (a, b) -> Math.abs(a) - Math.abs(b));
         int k = 0;
         for (int buffer : buffers) {
             for (int num : numlist) {
-                if (buffer == num - n) {
-                    answer[k] = num;
-                }
+                if (buffer == num - n) answer[k++] = num;
             }
-            k++;
         }
         return answer;
     }
