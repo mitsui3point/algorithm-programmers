@@ -1,6 +1,8 @@
 package level1.distinct_number;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * https://school.programmers.co.kr/learn/courses/30/lessons/12906
