@@ -13,6 +13,7 @@ public class DidNotFinishTheRace {
     }
 
     private static String solution(String[] participant, String[] completion) {
+        long start = System.currentTimeMillis();
         Map<String, Integer> result = new HashMap();
         for (String p : participant) {
             if (result.get(p) != null) {
@@ -31,6 +32,10 @@ public class DidNotFinishTheRace {
                 result.remove(c);
             }
         }
-        return result.keySet().toArray(String[]::new)[0];
+        String resultString = result.keySet().toArray(String[]::new)[0];
+        long end = System.currentTimeMillis();
+        double elapsedTime = ((end - start) / 1000d);
+        System.out.println("elapsedTime = " + elapsedTime + " ms");
+        return resultString;
     }
 }
