@@ -1,9 +1,6 @@
 package level2.phone_numbers;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * https://school.programmers.co.kr/learn/courses/30/lessons/42577
@@ -19,7 +16,20 @@ public class PhoneNumbers {
         System.out.println("isTrue = " + isTrue);
     }
     public static boolean solution(String[] phone_book) {
-        return result(hashedPhoneBook(phone_book));
+        Map<String, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < phone_book.length; i++) {
+            map.put(phone_book[i], i);
+        }
+        for(int i = 0; i < phone_book.length; i++) {
+            for(int j = 0; j < phone_book[i].length(); j++) {
+                if(map.containsKey(phone_book[i].substring(0,j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+//        return result(hashedPhoneBook(phone_book));
     }
     private static Map<Integer, Set<String>> hashedPhoneBook(String[] phoneBook) {
         Map<Integer, Set<String>> map = new HashMap();
@@ -46,3 +56,13 @@ public class PhoneNumbers {
         return true;
     }
 }
+/**
+
+
+
+
+
+
+
+
+ */
